@@ -1,19 +1,29 @@
-import Activos from "./componentes/Activos"
-import Reportes from "./componentes/Reportes"
-import Usuarios from "./componentes/Usuarios"
+import { useState, useEffect } from "react";
+import Login from "./componentes/Login";
+import Dashboard from "./componentes/Dashboard";
 
 export default function App() {
+   const [user, setUser] = useState(null);
 
-   return (
-      <>
-         <Activos />
-         <Reportes />
-         <Usuarios />
-      </>
-   )
+   useEffect(() => {
+      const token = localStorage.getItem("token");
+      const raw = localStorage.getItem("user");
+      if (token && raw) {
+         try {
+            setUser(JSON.parse(raw));
+         } catch {
+            localStorage.clear();
+         }
+      }
+   }, []);
 
+   const handleLogin = (u) => setUser(u);
+   const handleLogout = () => {
+      localStorage.clear();
+      setUser(null);
+   };
+
+   if (!user) return <Login onLogin={handleLogin} />;
+
+   return <Dashboard user={user} onLogout={handleLogout} />;
 }
-
-
-
-
