@@ -42,6 +42,32 @@ def crear_activos(): #define la funcion de python que se ejecuta cuando se acced
     conn.close()#cierra la coneccion de la base de datos 
     return jsonify({'msg': 'creado'}), 201 #retorna un mensaje creado 
 
+# quiero editar activos 
+@app.route('/activos/<int:id>', methods=['PUT'])
+def actualizar_activo(id):
+    data= request.get_json()
+    conn = get_connection()
+    with conn.cursor() as cursor:
+        sql = 'UPDATE activos SET nombreActivo=%s, ubicacion=%s, estado=%s WHERE id=%s'
+        filas = cursor.execute(sql, (data['nombreActivo'], data['ubicacion'], data['estado'], id))
+        conn.commit()
+    conn.close()
+    if filas == 0: 
+        return jsonify({'msg': 'No encontrado'}), 404
+    return jsonify({'msg': 'Actualizado'}), 200
+
+# quiero eliminar activos
+@app.route('/activos/<int:id>', methods=['DELETE'])
+def eliminar_activo(id):
+    conn = get_connection()
+    with conn.cursor() as cursor:
+        sql = 'DELETE FROM activos WHERE id=%s'
+        filas = cursor.execute(sql, (id,))
+        conn.commit()
+    conn.close()
+    if filas == 0:
+        return jsonify({'msg': 'No encontrado'}), 404
+    return jsonify({'msg': 'Eliminado'}), 200
 
 
 
