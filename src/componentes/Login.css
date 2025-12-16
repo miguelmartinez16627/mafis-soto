@@ -1,0 +1,142 @@
+/* Login.css - Diseño replicado de la imagen MAFIS */
+
+/* Contenedor principal: Fondo gradiente de pantalla completa */
+.login-container {
+    min-height: 100vh;
+    width: 100%;
+    background: linear-gradient(135deg, #0066cc 0%, #00cc66 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: white;
+    padding: 20px;
+}
+
+/* Sección de Encabezado (Logo + Títulos) */
+.login-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.logo-circle {
+    background-color: white;
+    color: #00995c; /* Verde oscuro similar al del texto SENA */
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin: 0 auto 15px auto;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.title-mafis {
+    font-size: 2.5rem;
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin-bottom: 5px;
+}
+
+.subtitle {
+    font-size: 0.9rem;
+    font-weight: 300;
+    max-width: 400px;
+    margin: 0 auto 20px auto;
+    line-height: 1.4;
+}
+
+.section-title {
+    font-size: 1rem;
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+/* Tarjeta del Formulario */
+.login-card {
+    background-color: white;
+    color: #333;
+    border-radius: 10px;
+    padding: 30px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+.form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 0.9rem;
+    color: #555;
+    font-weight: 500;
+}
+
+.form-input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 0.95rem;
+    transition: border-color 0.2s;
+}
+
+.form-input:focus {
+    border-color: #0066cc;
+    outline: none;
+}
+
+/* Botones y Enlaces */
+.btn-login {
+    width: 100%;
+    padding: 10px;
+    background-color: #3b71ca; /* Azul similar al botón */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+.btn-login:hover {
+    background-color: #3061af;
+}
+
+.login-links {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    margin-top: 10px;
+}
+
+.login-link {
+    color: #00995c;
+    text-decoration: none;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: inherit;
+}
+
+.login-link:hover {
+    text-decoration: underline;
+}
+
+/* Ajustes para textos pequeños o separadores si necesario */
+.Link-separator {
+    margin: 0 5px;
+    color: #ccc;
+}
