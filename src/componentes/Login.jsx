@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { API_URL } from "../config";
 import "./Login.css";
 
 export default function Login({ onLogin }) {
@@ -11,7 +12,7 @@ export default function Login({ onLogin }) {
     // ---------- LOGIN ----------
     const login = async (e) => {
         e.preventDefault();
-        const res = await fetch("http://localhost:5000/api/login", {
+        const res = await fetch(`${API_URL}/api/login`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ email, password }),
@@ -29,7 +30,7 @@ export default function Login({ onLogin }) {
     // ---------- REGISTRO ----------
     const register = async (e) => {
         e.preventDefault();
-        const res = await fetch("http://localhost:5000/api/register", {
+        const res = await fetch(`${API_URL}/api/register`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ nombre, email, password, rol }),
@@ -46,7 +47,7 @@ export default function Login({ onLogin }) {
     // ---------- RECUPERAR ----------
     const recover = async (e) => {
         e.preventDefault();
-        const res = await fetch("http://localhost:5000/api/recover", {
+        const res = await fetch(`${API_URL}/api/recover`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ email }),

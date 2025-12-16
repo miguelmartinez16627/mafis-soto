@@ -15,11 +15,11 @@ export default function Reportes() {
     // Cargar reportes y activos
     useEffect(() => {
         // reportes
-        fetch("http://localhost:5000/api/reportes")
+        fetch("/api/reportes")
             .then((res) => res.json())
             .then((data) => setDatos(data));
         // activos (para select)
-        fetch("http://localhost:5000/api/activos")
+        fetch("/api/activos")
             .then((res) => res.json())
             .then((data) => setActivos(data));
     }, []);
@@ -47,8 +47,8 @@ export default function Reportes() {
         if (!form.activo_id || !form.descripcion)
             return alert("Completa activo y descripción");
         const url = form.id
-            ? `http://localhost:5000/api/reportes/${form.id}`
-            : "http://localhost:5000/api/reportes";
+            ? `/api/reportes/${form.id}`
+            : "/api/reportes";
         const method = form.id ? "PUT" : "POST";
         const res = await fetch(url, {
             method,
@@ -60,7 +60,7 @@ export default function Reportes() {
             alert(msg.error || "Error al guardar");
             return;
         }
-        const nueva = await fetch("http://localhost:5000/api/reportes").then((r) =>
+        const nueva = await fetch("/api/reportes").then((r) =>
             r.json()
         );
         setDatos(nueva);
@@ -70,7 +70,7 @@ export default function Reportes() {
     // Eliminar
     const borrar = async (id) => {
         if (!window.confirm("¿Confirma eliminar este reporte?")) return;
-        const res = await fetch(`http://localhost:5000/api/reportes/${id}`, {
+        const res = await fetch(`/api/reportes/${id}`, {
             method: "DELETE",
         });
         if (!res.ok) {
@@ -78,7 +78,7 @@ export default function Reportes() {
             alert(msg.error || "Error al borrar");
             return;
         }
-        const nueva = await fetch("http://localhost:5000/api/reportes").then((r) =>
+        const nueva = await fetch("/api/reportes").then((r) =>
             r.json()
         );
         setDatos(nueva);

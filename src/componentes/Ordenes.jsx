@@ -1,5 +1,6 @@
 // src/components/Ordenes.jsx
 import { useEffect, useState } from "react";
+import { API_URL } from "../config";
 
 export default function Ordenes() {
     const [datos, setDatos] = useState([]);
@@ -16,15 +17,15 @@ export default function Ordenes() {
 
     // Cargar órdenes, reportes sin orden y técnicos
     useEffect(() => {
-        fetch("http://localhost:5000/api/ordenes")
+        fetch(`${API_URL}/api/ordenes`)
             .then((res) => res.json())
             .then((data) => setDatos(data));
 
-        fetch("http://localhost:5000/api/ordenes/sin-asignar")
+        fetch(`${API_URL}/api/ordenes/sin-asignar`)
             .then((res) => res.json())
             .then((data) => setReportesSinOrden(data));
 
-        fetch("http://localhost:5000/api/usuarios")
+        fetch(`${API_URL}/api/usuarios`)
             .then((res) => res.json())
             .then((data) => setTecnicos(data.filter((u) => u.rol === "tecnico")));
     }, []);
@@ -49,8 +50,8 @@ export default function Ordenes() {
         if (!form.reporte_id || !form.usuario_id || !form.descripcion)
             return alert("Completa todos los campos");
         const url = form.id
-            ? `http://localhost:5000/api/ordenes/${form.id}`
-            : "http://localhost:5000/api/ordenes";
+            ? `${API_URL}/api/ordenes/${form.id}`
+            : `${API_URL}/api/ordenes`;
         const method = form.id ? "PUT" : "POST";
         const res = await fetch(url, {
             method,
@@ -62,7 +63,7 @@ export default function Ordenes() {
             alert(msg.error || "Error al guardar");
             return;
         }
-        const nueva = await fetch("http://localhost:5000/api/ordenes").then((r) =>
+        const nueva = await fetch(`${API_URL}/api/ordenes`).then((r) =>
             r.json()
         );
         setDatos(nueva);
@@ -70,7 +71,7 @@ export default function Ordenes() {
     };
 
     const cambiarEstado = async (id, nuevoEstado) => {
-        const res = await fetch(`http://localhost:5000/api/ordenes/${id}/estado`, {
+        const res = await fetch(`${API_URL}/api/ordenes/${id}/estado`, {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ estado: nuevoEstado }),
@@ -84,7 +85,7 @@ export default function Ordenes() {
 
     const borrar = async (id) => {
         if (!window.confirm("¿Confirma eliminar esta orden?")) return;
-        const res = await fetch(`http://localhost:5000/api/ordenes/${id}`, {
+        const res = await fetch(`${API_URL}/api/ordenes/${id}`, {
             method: "DELETE",
         });
         if (!res.ok) {
